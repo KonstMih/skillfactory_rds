@@ -3,22 +3,22 @@
 import pandas as pd
 
 
-# Таблицы данных из файла
+# Таблица данных из файла
 data = pd.read_csv("data.csv")
 
-# Таблице данных столбца прибыли по каждому фильму
+# Столбец таблицы, содержащий данные о прибыли по каждому фильму
 data["pribil"] = data["revenue"] - data["budget"]
 
 # Замена псевдонима режисёра McG на реальное имя
 data["director"] = data["director"].apply(lambda x: "Joseph McGinty Nichol" if x == "McG" else x) 
 
-# Таблице данных столбца с наименованием месяца в котором был выпущен фильм
+# Столбец таблицы, содержащий наименование месяца, в котором был выпущен фильм
 data["mesac"] = data["release_date"].apply(lambda x: x.split("/")[0])
 
-# Таблице данных столбца с количеством символов в названии фильма
+# Столбец таблицы, содержащий количество символов в названии фильма
 data["kol_simvl"] = data["original_title"].apply(lambda x: len(x))
 
-# Таблице данных столбца с количеством слов в названии фильма
+# Столбец таблицы, содержащий количество слов в названии фильма
 data["kol_slov"] = data["original_title"].apply(lambda x: len(x.split(" ")))
 
 # Таблицы с положительной прибылью
@@ -26,7 +26,7 @@ data_prib = data[data["pribil"] > 0]
 
 
 def spisok_dannih(stolbec):
-# Функция для формирования имеющихся в столбце данных
+# Функция, формирующая список данных столбца, разделенных чертой
     spisok = []
     for i in data[stolbec].values:
         i = i.split("|")
@@ -37,7 +37,7 @@ def spisok_dannih(stolbec):
 
 
 def spisok_slov(stolbec):
-# Функция для формирования имеющихся в столбце данных
+# Функция, формирующая список данных столбца, разделенных пробелом
     spisok = []
     for i in data[stolbec].values:
         i = i.split(" ")
@@ -47,10 +47,10 @@ def spisok_slov(stolbec):
     return spisok
 
 
-# Список жаноров
+# Список жанров
 zhanr = spisok_dannih("genres")
 
-# Список режисёров
+# Список режиссёров
 reshiser = spisok_dannih("director")
 
 # Список актёров
@@ -65,7 +65,7 @@ god = list(data["release_year"].unique())
 # Список месяцев выпуска фильмов
 mesac = data["mesac"].unique()
 
-# Список слов используемых в названии фильмов
+# Список слов, используемых в названии фильмов
 slova = spisok_slov("original_title")
 
 
@@ -182,7 +182,7 @@ def vopros_13():
 
 
 def vopros_14():
-    # Четыранадцатый вопрос (правильный ответ 4 "Ridley Scott")
+    # Четырнадцатый вопрос (правильный ответ 4 "Ridley Scott")
     rezh_max_slovar = {}
     
     for i in reshiser:
@@ -474,7 +474,7 @@ def vopros_33():
 
 
 def vopros_34():
-    # Тридцать четвёртый вопрос (правильный ответ "фильмы которые входят в список")
+    # Тридцать четвёртый вопрос (правильный ответ "фильмы, которые входят в список")
     top_1_proc = data[data["vote_average"] >= data["vote_average"].quantile(0.99)]
     spisok_top_1_proc = list(top_1_proc["original_title"])
     spisok_top_1_proc.sort()
