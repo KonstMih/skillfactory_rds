@@ -500,7 +500,7 @@ def vopros_35():
 
 
 def vopros_36():
-    # Тридцать шестой вопрос (правильный ответ "нет ответа")
+    # Тридцать шестой вопрос (правильный ответ "Christopher Nolan")
     slovar = {}
     for i in reshiser:
         data_i = data[data["director"].str.contains(i)]
